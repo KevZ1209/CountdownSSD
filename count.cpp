@@ -6,10 +6,12 @@ int pinD = 5;
 int pinE = 6;
 int pinF = 7;
 int pinG = 8;
+int pinH = 13;
 int D1 = 9;
 int D2 = 10;
 int D3 = 11;
 int D4 = 12;
+const unsigned long REFRESH_VAL = 7;
 
 // Setup routine
 void setup() {
@@ -21,18 +23,20 @@ void setup() {
   pinMode(pinE, OUTPUT);
   pinMode(pinF, OUTPUT);
   pinMode(pinG, OUTPUT);
+  pinMode(pinH, OUTPUT);
   pinMode(D1, OUTPUT);
   pinMode(D2, OUTPUT);
   pinMode(D3, OUTPUT);
   pinMode(D4, OUTPUT);
 
   // start countdown
-  digitalWrite(D1,HIGH); 
-  digitalWrite(D2,LOW); 
+  digitalWrite(D1,LOW); 
+  digitalWrite(D2,HIGH); 
   digitalWrite(D3,HIGH); 
   digitalWrite(D4,HIGH);
 
   display4();
+  
 
   delay(1000);
 
@@ -41,7 +45,7 @@ void setup() {
   digitalWrite(D2,LOW); 
   digitalWrite(D3,HIGH); 
   digitalWrite(D4,HIGH);
-
+  
   display3();
 
   delay(1000);
@@ -51,6 +55,7 @@ void setup() {
   digitalWrite(D3,LOW); 
   digitalWrite(D4,HIGH);
   display2();
+  
   delay(1000);
 
   digitalWrite(D1,HIGH); 
@@ -58,16 +63,20 @@ void setup() {
   digitalWrite(D3,HIGH); 
   digitalWrite(D4,LOW);
   display1();
+  
   delay(1000);
-
-  digitalWrite(D1,HIGH); 
-  digitalWrite(D2,HIGH); 
-  digitalWrite(D3,HIGH); 
-  digitalWrite(D4,LOW);
-  display0();
-  
   
 
+}
+
+
+
+void displaydec() {
+  digitalWrite(pinH, HIGH);
+}
+
+void removedec() {
+  digitalWrite(pinH, LOW);
 }
 
 void display0() {
@@ -78,6 +87,7 @@ void display0() {
   digitalWrite(pinE, HIGH);
   digitalWrite(pinF, HIGH);
   digitalWrite(pinG, LOW);
+  
 }
 
 // functions
@@ -212,9 +222,9 @@ case(7): display7(); break;
 case(8): display8(); break;
 case(9): display9(); break;  
 }
-delay(5); // Add a small delay
+delay(REFRESH_VAL); // Add a small delay
 
-if (millis() - t >= 1000) {
+if (millis() - t >= 100) {
   i++;
   t = millis();
 }
@@ -224,6 +234,7 @@ digitalWrite(D1,HIGH);
 digitalWrite(D2,HIGH); 
 digitalWrite(D3,LOW); 
 digitalWrite(D4,HIGH);
+displaydec();
 
 switch(d2) { // Use a switch case to call the appropriate function for each digit
 case(0): display0(); break;
@@ -237,9 +248,9 @@ case(7): display7(); break;
 case(8): display8(); break;
 case(9): display9(); break;  
 }
-delay(5); // Add a small delay
+delay(REFRESH_VAL); // Add a small delay
 
-if (millis() - t >= 1000) {
+if (millis() - t >= 100) {
   i++;
   t = millis();
 }
@@ -249,6 +260,7 @@ digitalWrite(D1,HIGH);
 digitalWrite(D2,LOW); 
 digitalWrite(D3,HIGH); 
 digitalWrite(D4,HIGH);
+removedec();
 
 switch(d3) { // Use a switch case to call the appropriate function for each digit
 case(0): display0(); break;
@@ -262,9 +274,9 @@ case(7): display7(); break;
 case(8): display8(); break;
 case(9): display9(); break;  
 }
-delay(5); // Add a small delay
+delay(REFRESH_VAL); // Add a small delay
 
-if (millis() - t >= 1000) {
+if (millis() - t >= 100) {
   i++;
   t = millis();
 }
@@ -287,9 +299,9 @@ case(7): display7(); break;
 case(8): display8(); break;
 case(9): display9(); break;  
 }
-delay(5); // Add a small delay
+delay(REFRESH_VAL); // Add a small delay
 
-if (millis() - t >= 1000) {
+if (millis() - t >= 100) {
   i++;
   t = millis();
 }
